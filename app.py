@@ -87,6 +87,36 @@ st.markdown(
         padding: 0.75rem 1rem;
         border-radius: 10px;
     }
+    /* Sol menü (sidebar) dikey boşluklarını sıkılaştır */
+    section[data-testid="stSidebar"] > div:first-child {
+        padding-top: 0.6rem !important;
+        padding-bottom: 0.8rem !important;
+    }
+    section[data-testid="stSidebar"] div[data-testid="stSidebarUserContent"] {
+        padding-top: 0.4rem !important;
+    }
+    section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] {
+        gap: 0.42rem !important;
+    }
+    section[data-testid="stSidebar"] h2 {
+        font-size: 1.02rem !important;
+        padding: 0.15rem 0 0.05rem 0 !important;
+        margin: 0 !important;
+        line-height: 1.25 !important;
+    }
+    section[data-testid="stSidebar"] hr {
+        margin: 0.35rem 0 !important;
+    }
+    section[data-testid="stSidebar"] div[data-testid="stAlert"] {
+        padding: 0.45rem 0.7rem !important;
+        font-size: 0.85rem !important;
+    }
+    section[data-testid="stSidebar"] section[data-testid="stFileUploaderDropzone"] {
+        padding: 0.55rem 0.7rem !important;
+    }
+    section[data-testid="stSidebar"] div[data-testid="stWidgetLabel"] {
+        margin-bottom: 0.15rem !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -246,16 +276,19 @@ with st.sidebar:
 
             st.divider()
             st.header("4. Bootstrap Ayarları")
-            n_bootstrap = st.number_input(
-                "Bootstrap Tekrar Sayısı",
-                min_value=500,
-                max_value=20000,
-                value=5000,
-                step=500,
-                help="Hayes PROCESS varsayılanı 5000 tekrardır.",
-            )
-            conf_level = st.selectbox("Güven Düzeyi (%)", options=[90.0, 95.0, 99.0], index=1)
-            use_seed = st.checkbox("Sabit Random Seed kullan (Tekrarlanabilirlik)", value=True)
+            b_col1, b_col2 = st.columns(2)
+            with b_col1:
+                n_bootstrap = st.number_input(
+                    "Tekrar Sayısı",
+                    min_value=500,
+                    max_value=20000,
+                    value=5000,
+                    step=500,
+                    help="Hayes PROCESS varsayılanı 5000 tekrardır.",
+                )
+            with b_col2:
+                conf_level = st.selectbox("Güven Düzeyi (%)", options=[90.0, 95.0, 99.0], index=1)
+            use_seed = st.checkbox("Sabit Random Seed kullan", value=True)
             random_seed = (
                 int(st.number_input("Random Seed", min_value=0, max_value=999999, value=42, step=1))
                 if use_seed
@@ -316,7 +349,6 @@ with st.sidebar:
                 "conf_level": float(conf_level),
             }
 
-        st.divider()
         run_clicked = st.button("🚀 Analizi Çalıştır", type="primary", use_container_width=True)
 
 
