@@ -349,7 +349,7 @@ with st.sidebar:
                 "conf_level": float(conf_level),
             }
 
-        run_clicked = st.button("🚀 Analizi Çalıştır", type="primary", use_container_width=True)
+        run_clicked = st.button("🚀 Analizi Çalıştır", type="primary", width="stretch")
 
 
 # ---------------------------------------------------------------------------
@@ -383,9 +383,9 @@ with st.expander("📂 Veri Seti Özeti, İlk 5 Satır, Eksik Değerler ve Betim
         ["🔍 İlk 5 Satır", "⚠️ Eksik Değer Özeti", "📊 Betimsel İstatistikler"]
     )
     with tab_head:
-        st.dataframe(df.head(5), use_container_width=True)
+        st.dataframe(df.head(5), width="stretch")
     with tab_missing:
-        st.dataframe(_format_numeric_styler(missing_df), use_container_width=True, hide_index=True)
+        st.dataframe(_format_numeric_styler(missing_df), width="stretch", hide_index=True)
         st.caption(
             "Not: Analiz sırasında yalnızca seçilen değişkenler (X, Y, M/W ve Kontrol) üzerinde "
             "**satır bazlı silme (listwise deletion)** uygulanır."
@@ -398,12 +398,12 @@ with st.expander("📂 Veri Seti Özeti, İlk 5 Satır, Eksik Değerler ve Betim
                         for k, v in meta_info["variable_labels"].items()
                     ]
                 )
-                st.dataframe(lbl_df, use_container_width=True, hide_index=True)
+                st.dataframe(lbl_df, width="stretch", hide_index=True)
     with tab_desc:
         if desc_df.empty:
             st.warning("Veri setinde sayısal değişken bulunamadı.")
         else:
-            st.dataframe(_format_numeric_styler(desc_df), use_container_width=True, hide_index=True)
+            st.dataframe(_format_numeric_styler(desc_df), width="stretch", hide_index=True)
 
 
 # ---------------------------------------------------------------------------
@@ -475,7 +475,7 @@ with export_col:
         file_name=f"PROCESS_{model_slug}_Sonuclar.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         type="primary",
-        use_container_width=True,
+        width="stretch",
     )
 
 # Akademik Türkçe Yorum Alanı
@@ -513,7 +513,7 @@ if results["model_type"] == "Model 4":
 
     with m4_tab_vis:
         fig_path = plot_mediation_path_diagram(results)
-        st.pyplot(fig_path, use_container_width=True)
+        st.pyplot(fig_path, width="stretch")
         st.download_button(
             "🖼️ Yol Diyagramını PNG İndir (300 DPI)",
             data=figure_to_png_bytes(fig_path),
@@ -524,7 +524,7 @@ if results["model_type"] == "Model 4":
 
         st.markdown("#### Percentile Bootstrap Dolaylı Etki Dağılımı")
         fig_boot = plot_bootstrap_distribution(results)
-        st.pyplot(fig_boot, use_container_width=True)
+        st.pyplot(fig_boot, width="stretch")
         st.download_button(
             "🖼️ Bootstrap Grafiğini PNG İndir (300 DPI)",
             data=figure_to_png_bytes(fig_boot),
@@ -535,16 +535,16 @@ if results["model_type"] == "Model 4":
 
     with m4_tab_ind:
         st.markdown("#### Toplam Etki (c) ve Doğrudan Etki (c')")
-        st.dataframe(_format_numeric_styler(results["total_direct_df"]), use_container_width=True, hide_index=True)
+        st.dataframe(_format_numeric_styler(results["total_direct_df"]), width="stretch", hide_index=True)
 
         st.markdown(
             f"#### Dolaylı Etki(ler) — Percentile Bootstrap "
             f"(Tekrar: {results['n_bootstrap']:,}, Seed: {results['random_seed']})"
         )
-        st.dataframe(_format_numeric_styler(results["indirect_df"]), use_container_width=True, hide_index=True)
+        st.dataframe(_format_numeric_styler(results["indirect_df"]), width="stretch", hide_index=True)
 
         st.markdown("#### Klasik Sobel Testi (Normal Teori Testi)")
-        st.dataframe(_format_numeric_styler(results["sobel_df"]), use_container_width=True, hide_index=True)
+        st.dataframe(_format_numeric_styler(results["sobel_df"]), width="stretch", hide_index=True)
         st.caption(
             "Not: Akademik literatürde (Hayes, 2022) dolaylı etkinin anlamlılığı için normallik varsayımı gerektirmeyen "
             "Percentile Bootstrap güven aralığı (BootLLCI – BootULCI) birincil ölçüt olarak önerilmektedir."
@@ -552,18 +552,18 @@ if results["model_type"] == "Model 4":
 
     with m4_tab_reg:
         st.markdown("#### Tüm Modellerin Özet Tablosu ($R$, $R^2$, $F$, $p$)")
-        st.dataframe(_format_numeric_styler(results["all_summaries_df"]), use_container_width=True, hide_index=True)
+        st.dataframe(_format_numeric_styler(results["all_summaries_df"]), width="stretch", hide_index=True)
 
         st.markdown("#### Aracı Değişken Modelleri (a Yolları)")
         for m_col, m_res in results["a_models"].items():
             st.markdown(f"**{m_res['title']}**")
-            st.dataframe(_format_numeric_styler(m_res["coef_df"]), use_container_width=True, hide_index=True)
+            st.dataframe(_format_numeric_styler(m_res["coef_df"]), width="stretch", hide_index=True)
 
         st.markdown(f"#### {results['y_model']['title']}")
-        st.dataframe(_format_numeric_styler(results["y_model"]["coef_df"]), use_container_width=True, hide_index=True)
+        st.dataframe(_format_numeric_styler(results["y_model"]["coef_df"]), width="stretch", hide_index=True)
 
         st.markdown(f"#### {results['total_model']['title']}")
-        st.dataframe(_format_numeric_styler(results["total_model"]["coef_df"]), use_container_width=True, hide_index=True)
+        st.dataframe(_format_numeric_styler(results["total_model"]["coef_df"]), width="stretch", hide_index=True)
 
 # ---------------------------------------------------------------------------
 # MODEL 1 SEKMELERİ
@@ -581,7 +581,7 @@ else:
     with m1_tab_vis:
         show_ci = st.checkbox("Etkileşim grafiğinde %95 güven bandını göster", value=True)
         fig_int = plot_moderation_interaction(results, show_ci=show_ci)
-        st.pyplot(fig_int, use_container_width=True)
+        st.pyplot(fig_int, width="stretch")
         st.download_button(
             "🖼️ Etkileşim Grafiğini PNG İndir (300 DPI)",
             data=figure_to_png_bytes(fig_int),
@@ -592,7 +592,7 @@ else:
 
         st.markdown("#### İstatistiksel Yol Diyagramı (Model 1)")
         fig_m1_path = plot_moderation_path_diagram(results)
-        st.pyplot(fig_m1_path, use_container_width=True)
+        st.pyplot(fig_m1_path, width="stretch")
         st.download_button(
             "🖼️ Yol Diyagramını PNG İndir (300 DPI)",
             data=figure_to_png_bytes(fig_m1_path),
@@ -605,7 +605,7 @@ else:
         st.markdown("#### Model Özeti ($R$, $R^2$, $F$, $p$)")
         st.dataframe(
             _format_numeric_styler(results["full_model"]["summary_df"]),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -618,14 +618,14 @@ else:
         st.caption(center_badge)
         st.dataframe(
             _format_numeric_styler(results["full_model"]["coef_df"]),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
         st.markdown("#### En Yüksek Dereceli Koşulsuz Etkileşim Testi ($\\Delta R^2$)")
         st.dataframe(
             _format_numeric_styler(results["interaction_test_df"]),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -635,13 +635,13 @@ else:
         )
         st.dataframe(
             _format_numeric_styler(results["simple_slopes_df"]),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
         st.markdown("#### Etkileşim Grafiği Tahmin Edilen $\\hat{Y}$ Değerleri")
         st.dataframe(
             _format_numeric_styler(results["plot_data_df"]),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
