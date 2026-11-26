@@ -47,23 +47,28 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    /* Ana ekranın en üstündeki fazla boşluğu azalt */
+    div.block-container {
+        padding-top: 1.5rem !important;
+        padding-bottom: 2rem !important;
+    }
     .main-header {
         background: linear-gradient(135deg, #1E3A5F 0%, #2563EB 100%);
-        padding: 1.4rem 1.8rem;
+        padding: 1.15rem 1.5rem;
         border-radius: 12px;
         color: #FFFFFF;
-        margin-bottom: 1.2rem;
+        margin-bottom: 0.95rem;
     }
     .main-header h1 {
         color: #FFFFFF;
-        font-size: 1.7rem;
-        margin: 0 0 0.25rem 0;
+        font-size: 1.62rem;
+        margin: 0 0 0.2rem 0;
         font-weight: 700;
     }
     .main-header p {
         color: #E2E8F0;
         margin: 0;
-        font-size: 0.96rem;
+        font-size: 0.94rem;
     }
     .interp-box-sig {
         background-color: #ECFDF5;
@@ -87,35 +92,38 @@ st.markdown(
         padding: 0.75rem 1rem;
         border-radius: 10px;
     }
-    /* Sol menü (sidebar) dikey boşluklarını sıkılaştır */
+    /* Sol menü (sidebar): dengeli, ferah ama kompakt boşluklar */
     section[data-testid="stSidebar"] > div:first-child {
-        padding-top: 0.6rem !important;
-        padding-bottom: 0.8rem !important;
+        padding-top: 0.85rem !important;
+        padding-bottom: 1.2rem !important;
     }
     section[data-testid="stSidebar"] div[data-testid="stSidebarUserContent"] {
-        padding-top: 0.4rem !important;
+        padding-top: 0.5rem !important;
     }
     section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] {
-        gap: 0.42rem !important;
+        gap: 0.68rem !important;
     }
     section[data-testid="stSidebar"] h2 {
-        font-size: 1.02rem !important;
-        padding: 0.15rem 0 0.05rem 0 !important;
+        font-size: 1.05rem !important;
+        padding: 0.28rem 0 0.12rem 0 !important;
         margin: 0 !important;
-        line-height: 1.25 !important;
+        line-height: 1.3 !important;
     }
     section[data-testid="stSidebar"] hr {
-        margin: 0.35rem 0 !important;
+        margin: 0.65rem 0 !important;
     }
     section[data-testid="stSidebar"] div[data-testid="stAlert"] {
-        padding: 0.45rem 0.7rem !important;
-        font-size: 0.85rem !important;
+        padding: 0.55rem 0.8rem !important;
+        font-size: 0.86rem !important;
     }
     section[data-testid="stSidebar"] section[data-testid="stFileUploaderDropzone"] {
-        padding: 0.55rem 0.7rem !important;
+        padding: 0.65rem 0.75rem !important;
     }
     section[data-testid="stSidebar"] div[data-testid="stWidgetLabel"] {
-        margin-bottom: 0.15rem !important;
+        margin-bottom: 0.24rem !important;
+    }
+    section[data-testid="stSidebar"] button[kind="primary"] {
+        margin-top: 0.45rem !important;
     }
     </style>
     """,
